@@ -6,12 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1D04565B2EC70B0D00F12B4F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 1D04565A2EC70B0D00F12B4F /* SwiftSoup */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		1D1ED0742EC34F5200760901 /* LottoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DDC00BB2EC5B53600083394 /* LottoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1D1ED0762EC34F5200760901 /* LottoApp */ = {
+		1D583D182EC5A0DE00558CB1 /* LottoApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = LottoApp;
 			sourceTree = "<group>";
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D04565B2EC70B0D00F12B4F /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,17 +37,9 @@
 		1D1ED06B2EC34F5200760901 = {
 			isa = PBXGroup;
 			children = (
-				1D1ED0762EC34F5200760901 /* LottoApp */,
-				1D1ED0752EC34F5200760901 /* Products */,
+				1D583D182EC5A0DE00558CB1 /* LottoApp */,
+				1DDC00BB2EC5B53600083394 /* LottoApp.app */,
 			);
-			sourceTree = "<group>";
-		};
-		1D1ED0752EC34F5200760901 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1D1ED0742EC34F5200760901 /* LottoApp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,13 +58,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				1D1ED0762EC34F5200760901 /* LottoApp */,
+				1D583D182EC5A0DE00558CB1 /* LottoApp */,
 			);
 			name = LottoApp;
 			packageProductDependencies = (
+				1D04565A2EC70B0D00F12B4F /* SwiftSoup */,
 			);
 			productName = LottoApp;
-			productReference = 1D1ED0742EC34F5200760901 /* LottoApp.app */;
+			productReference = 1DDC00BB2EC5B53600083394 /* LottoApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -94,8 +92,11 @@
 			);
 			mainGroup = 1D1ED06B2EC34F5200760901;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1D0456592EC70B0D00F12B4F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 1D1ED0752EC34F5200760901 /* Products */;
+			productRefGroup = 1D1ED06B2EC34F5200760901;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -251,13 +252,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XB35FPJUM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -282,13 +284,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XB35FPJUM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,6 +331,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D0456592EC70B0D00F12B4F /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D04565A2EC70B0D00F12B4F /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D0456592EC70B0D00F12B4F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D1ED06C2EC34F5200760901 /* Project object */;
 }
