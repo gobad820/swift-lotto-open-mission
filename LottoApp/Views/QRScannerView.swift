@@ -19,32 +19,31 @@ struct QRScannerView: UIViewControllerRepresentable {
     }
     
     // MARK: - Coordinator (중개인)
-        class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-            let parent: QRScannerView
-            var lastScannedCode: String?
-            var lastScanTime: Date = Date()
+    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+        let parent: QRScannerView
+        var lastScannedCode: String?
+        var lastScanTime: Date = Date()
+        
+        init(parent: QRScannerView) {
+            self.parent = parent
+        }
+        
+        func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
             
-            init(parent: QRScannerView) {
-                self.parent = parent
-            }
-            
-            func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+            if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
+               let scannedValue = metadataObject.stringValue {
                 
-                if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
-                   let scannedValue = metadataObject.stringValue {
-                    
-                    let now = Date()
-                    if scannedValue == lastScannedCode && now.timeIntervalSince(lastScanTime) < 2.0 {
-                        return
-                    }
-                    
-                    lastScannedCode = scannedValue
-                    lastScanTime = now
-                    
-                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                    
-                    parent.onScan(scannedValue)
+                let now = Date()
+                if scannedValue == lastScannedCode && now.timeIntervalSince(lastScanTime) < 2.0 {
+                    return
                 }
+                
+                lastScannedCode = scannedValue
+                lastScanTime = now
+                
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                
+                parent.onScan(scannedValue)
             }
         }
     }
