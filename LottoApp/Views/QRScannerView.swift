@@ -82,7 +82,7 @@ class ScannerViewController: UIViewController {
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr] // QR 코드만 인식
+            metadataOutput.metadataObjectTypes = [.qr]
         } else {
             return
         }
@@ -92,7 +92,6 @@ class ScannerViewController: UIViewController {
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
         
-        // 백그라운드 스레드에서 실행 (UI 버벅임 방지)
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
@@ -105,7 +104,6 @@ class ScannerViewController: UIViewController {
         }
     }
     
-    // 뷰가 사라질 때 카메라 끄기 (배터리 절약)
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if (captureSession?.isRunning == true) {
