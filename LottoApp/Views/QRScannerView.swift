@@ -48,3 +48,68 @@ struct QRScannerView: UIViewControllerRepresentable {
         }
     }
 }
+
+// MARK: - UIKit Camera Controller (엔진)
+class ScannerViewController: UIViewController {
+    var captureSession: AVCaptureSession!
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    weak var delegate: AVCaptureMetadataOutputObjectsDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.black
+        captureSession = AVCaptureSession()
+        
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+        
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            return
+        }
+        
+        if (captureSession.canAddInput(videoInput)) {
+            captureSession.addInput(videoInput)
+        } else {
+            return
+        }
+        
+        let metadataOutput = AVCaptureMetadataOutput()
+        
+        if (captureSession.canAddOutput(metadataOutput)) {
+            captureSession.addOutput(metadataOutput)
+            
+            metadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr] // QR 코드만 인식
+        } else {
+            return
+        }
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        
+        // 백그라운드 스레드에서 실행 (UI 버벅임 방지)
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if let layer = previewLayer {
+            layer.frame = view.layer.bounds
+        }
+    }
+    
+    // 뷰가 사라질 때 카메라 끄기 (배터리 절약)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
+}
