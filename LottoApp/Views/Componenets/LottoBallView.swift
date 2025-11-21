@@ -1,10 +1,3 @@
-//
-//  LottoBallView.swift
-//  LottoApp
-//
-//  Created by 김상해 on 11/13/25.
-//
-
 import SwiftUI
 
 struct LottoBallView: View{

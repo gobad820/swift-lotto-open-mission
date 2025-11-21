@@ -1,10 +1,3 @@
-//
-//  LottoResult.swift
-//  LottoApp
-//
-//  Created by 김상해 on 11/14/25.
-//
-
 import Foundation
 import SwiftUI
 
