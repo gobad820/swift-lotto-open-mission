@@ -83,7 +83,89 @@ class LottoViewModel: ObservableObject{
     }
     
     var canCheckResult: Bool{
-        !winningNumbers.isEmpty && !tickets.isEmpty
+        !winningNumbers.isEmpty && !scannedTickets.isEmpty
+    }
+    
+    func addTicketFromQR(url: String) {
+        print("📷 스캔 감지: \(url)")
+       
+        let result = parseQRUrl(url)
+        let newTickets = result.tickets
+        let scannedRound = result.round
+        
+        if newTickets.isEmpty {
+            print("⚠️ 유효하지 않은 로또 QR입니다.")
+            return
+        }
+        
+        scannedTickets.insert(contentsOf: newTickets.reversed(), at: 0)
+        
+        if let round = scannedRound {
+            print("\(round)회차 QR 감지 ! 당첨 번호 조회를 시작합니다.")
+            
+            Task {
+                await fetchWinningData(round: round)
+            }
+        }
+    }
+    
+    private func parseQRUrl(_ url: String) -> (round: Int?,tickets: [LottoTicket] ){
+        print("🔍 원본 URL 분석: \(url)")
+        
+        guard let range = url.range(of: "v=") else { return(nil, []) }
+        var dataString = String(url[range.upperBound...])
+        
+        if dataString.count < 4 { return (nil, []) }
+        
+        let roundString = String(dataString.prefix(4))
+        let round = Int(roundString)
+        
+        dataString.removeFirst(4)
+        
+        
+        let numberOnlyString = dataString.filter { $0.isNumber }
+        
+        var parsedTickets: [LottoTicket] = []
+        var currentIndex = numberOnlyString.startIndex
+        
+        while currentIndex < numberOnlyString.endIndex {
+            guard let end = numberOnlyString.index(currentIndex, offsetBy: 12, limitedBy: numberOnlyString.endIndex) else { break }
+            
+            let gameString = String(numberOnlyString[currentIndex..<end])
+            let numbers = extractNumbers(from: gameString)
+            
+            let isValidTicket = numbers.count == 6 &&
+            numbers.allSatisfy { $0 >= 1 && $0 <= 45 } &&
+            Set(numbers).count == 6
+            
+            if isValidTicket {
+                parsedTickets.append(LottoTicket(numbers: numbers))
+            } else {
+                print("🗑️ 가짜/더미 데이터 폐기: \(numbers)")
+            }
+            
+            currentIndex = end
+        }
+        
+        return (round, parsedTickets)
+    }
+    
+    private func extractNumbers(from string: String) -> [Int] {
+        var result: [Int] = []
+        var currentIndex = string.startIndex
+        
+        while currentIndex < string.endIndex {
+            let nextIndex = string.index(currentIndex, offsetBy: 2)
+            if nextIndex > string.endIndex { break }
+            
+            let numberString = string[currentIndex..<nextIndex]
+            if let number = Int(numberString) {
+                result.append(number)
+            }
+            
+            currentIndex = nextIndex
+        }
+        return result.sorted()
     }
     
 }
