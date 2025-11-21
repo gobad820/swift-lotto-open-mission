@@ -39,6 +39,24 @@ struct ContentView: View {
         } message: {
             Text(changeAlertMessage)
         }
+        .sheet(isPresented: $showScanner) {
+            ZStack(alignment: .topTrailing) {
+                QRScannerView { code in
+                    viewModel.addTicketFromQR(url: code)
+                }
+                .edgesIgnoringSafeArea(.all)
+                
+                Button(action: {
+                    showScanner = false
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                        .padding()
+                }
+            }
+        }
+        
     }
     
     // MARK: - Header Section
@@ -233,17 +251,6 @@ struct ContentView: View {
         VStack(spacing: 15) {
             Text("당첨 번호 직접 입력")
                 .font(.headline)
-            
-            TextField("복권 당첨 번호를 입력하세요 (공백으로 구분)", text: $inputNumber)
-                .textFieldStyle(.roundedBorder)
-                .keyboardType(.numbersAndPunctuation)
-            
-            Button("입력") {
-                viewModel.setWinningNumbers(inputNumber)
-                inputNumber = ""  // 입력 후 초기화
-            }
-            .buttonStyle(.bordered)
-            .disabled(inputNumber.isEmpty)
             
             if !viewModel.winningNumbers.isEmpty {
                 VStack(spacing: 8) {
