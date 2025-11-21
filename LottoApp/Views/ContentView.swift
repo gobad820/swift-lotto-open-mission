@@ -7,20 +7,22 @@ struct ContentView: View {
     @State private var roundNumber = "1197"
     @FocusState private var isInputActive: Bool
     @State private var showChangeAlert = false  // ✅ 잔돈 경고용
+    @State private var showScanner = false
     
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 headerSection
-                purchaseSection
+                scannerStartButton
+                if !viewModel.scannedTickets.isEmpty {
+                    scannedTicketsSection
+                }
                 
-                // ✅ 티켓이 있을 때만 표시
                 if !viewModel.tickets.isEmpty {
                     ticketsSection
                 }
                 
-                fetchWinningSection
-                winningInputSection  // ✅ 추가!
+                winningInputSection
                 checkResultButton
                 
                 if viewModel.showResults {
@@ -246,10 +248,10 @@ struct ContentView: View {
         .cornerRadius(10)
     }
     
-    // MARK: - Winning Input Section  ✅ 이게 빠져있었어요!
+    // MARK: - Winning Input Section
     private var winningInputSection: some View {
         VStack(spacing: 15) {
-            Text("당첨 번호 직접 입력")
+            Text("당첨 번호")
                 .font(.headline)
             
             if !viewModel.winningNumbers.isEmpty {
