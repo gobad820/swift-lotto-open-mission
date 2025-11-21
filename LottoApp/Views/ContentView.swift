@@ -305,7 +305,56 @@ struct ContentView: View {
         .cornerRadius(12)
     }
     
-    // ✅ 당첨 개수에 따른 색상
+    private var scannerStartButton: some View {
+        Button(action: {
+            showScanner = true
+        }) {
+            HStack {
+                Image(systemName: "qrcode.viewfinder")
+                    .font(.title2)
+                Text("QR 연속 스캔 시작")
+                    .font(.headline)
+                    .fontWeight(.bold)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.indigo)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .shadow(radius: 2)
+        }
+    }
+    
+    private var scannedTicketsSection: some View {
+        VStack(spacing: 15) {
+            HStack {
+                Text("스캔 된 복권")
+                    .font(.headline)
+                Spacer()
+                Text("\(viewModel.scannedTickets.count)장")
+                    .font(.headline)
+                    .foregroundStyle(.indigo)
+            }
+            
+            Divider()
+            
+            ForEach(viewModel.scannedTickets) { ticket in
+                LottoTicketView(
+                    ticket: ticket,
+                    matchCount: viewModel.showResults ? viewModel.matchCount(for: ticket) : nil
+                )
+                .padding(.vertical, 4)
+            }
+        }
+        .padding()
+        .background(Color.indigo.opacity(0.05))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.indigo.opacity(0.3), lineWidth: 1)
+        )
+    }
+    
     private func resultColor(for count: Int) -> Color {
         switch count {
         case 6: return .red
