@@ -12,6 +12,8 @@ class LottoViewModel: ObservableObject{
     @Published var isLoading = false
     @Published var errorMessage: String?
     
+    @Published var scannedTickets: [LottoTicket] = []
+    
     func fetchWinningData(round: Int) async {
         await MainActor.run {
             self.isLoading = true
