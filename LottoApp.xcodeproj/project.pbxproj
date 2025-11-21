@@ -14,9 +14,22 @@
 		1DDC00BB2EC5B53600083394 /* LottoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1D5A8F972ECF2BA900A5DCFA /* Exceptions for "LottoApp" folder in "LottoApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1D1ED0732EC34F5200760901 /* LottoApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1D583D182EC5A0DE00558CB1 /* LottoApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1D5A8F972ECF2BA900A5DCFA /* Exceptions for "LottoApp" folder in "LottoApp" target */,
+			);
 			path = LottoApp;
 			sourceTree = "<group>";
 		};
@@ -255,6 +268,8 @@
 				DEVELOPMENT_TEAM = XB35FPJUM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LottoApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "QR 코드 스캔을 위해 카메라 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -287,6 +302,8 @@
 				DEVELOPMENT_TEAM = XB35FPJUM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LottoApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "QR 코드 스캔을 위해 카메라 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
